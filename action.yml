@@ -1,0 +1,15 @@
+name: 'Generate Context File'
+description: 'Generate OpenContext Artifact Context File'
+inputs:
+  type:
+    description: 'Type of artifact. One of sbom, container, package, or image'
+    required: true
+  url:
+    description: 'URL of the artifact'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.artifact-type }}
+    - ${{ inputs.url }}
