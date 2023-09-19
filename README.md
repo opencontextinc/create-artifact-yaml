@@ -6,6 +6,8 @@ A GitHub action to generate an OpenContext YAML definition for your artifacts in
 * container
 * image
 
+If the GITHUB_ACTOR for the pipeline is a bot then a YAML definition will also be created for the bot.
+
 ## Usage
 In general you will need to do the following to make use of this GitHub action:
 
