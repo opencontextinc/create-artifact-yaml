@@ -13,7 +13,7 @@ In general you will need to do the following to make use of this GitHub action:
 * Upload artifact somewhere and make the location (URI/URL) of the artifact an output of a step
 * Pass the location of the artifact to this GitHub action
 * Save OpenContext YAML to the current repo or to another GitHub repo
-  * Use the output `filename` for the path to tar-gzipped file containing all the YAML generated
+  * Use the output `filename` for the path to artifact-context.tar.gz file containing all the YAML generated
   * Use the output `directory` for the path to the directory containing all the YAML generated
 
 ### Generate a YAML definition for a SBOM artifact
