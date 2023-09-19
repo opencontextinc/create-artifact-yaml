@@ -49,7 +49,7 @@ steps:
   - id: generate-artifact-context
     uses: opencontextinc/artifact-context@v1.0.0
     with:
-      type: sbom
+      type: package
       url: ${{ steps.upload-package-get-url.outputs.url }}
 
   - name: Save OpenContext YAML
@@ -69,7 +69,7 @@ steps:
   - id: generate-artifact-context
     uses: opencontextinc/artifact-context@v1.0.0
     with:
-      type: sbom
+      type: container
       url: ${{ steps.push-container-to-registry.outputs.url }}
 
   - name: Save OpenContext YAML
@@ -90,7 +90,7 @@ steps:
   - id: generate-artifact-context
     uses: opencontextinc/artifact-context@v1.0.0
     with:
-      type: sbom
+      type: image
       url: ${{ steps.upload-image-get-url.outputs.url }}
 
   - name: Save OpenContext YAML
