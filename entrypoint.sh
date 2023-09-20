@@ -1,12 +1,19 @@
 #!/bin/sh
+# shellcheck disable=SC3057
 
 export artifactType="${INPUT_TYPE}"
 export url="${INPUT_URL}"
 export fullname="${url##*/}"
-export shortname="${fullname:0:63}"
 export ghaPath="${GITHUB_WORKSPACE}/artifact-context"
 export tplName=""
 export filename=""
+
+if [ "$artifactType" == "container" ]; then
+  tShortName="${fullname%%:*}"
+  export shortname="${tShortName:0:63}"
+else
+  export shortname="${fullname:0:63}"
+fi
 
 env
 jq . "$GITHUB_EVENT_PATH"
