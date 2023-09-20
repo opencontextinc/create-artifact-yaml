@@ -1,0 +1,12 @@
+apiVersion: opencontext.com/v1alpha1
+kind: Person
+metadata:
+  namespace: GH_ORG
+  name: ACTOR
+  annotations:
+    github.com/project-slug: GITHUB_REPO
+spec:
+  profile:
+    picture: https://github.com/identicons/app/app/ACTOR
+    role: bot
+  memberOf: []
