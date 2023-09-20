@@ -16,10 +16,11 @@ In general you will need to do the following to make use of this GitHub action:
 - Generate artifact
 - Upload artifact somewhere and make the location (URI/URL) of the artifact an output of a step
 - Pass the location of the artifact to this GitHub action
+- Optionally pass the directory to save the YAML files to
 - Save OpenContext YAML to either:
   - the current repo or
   - to another GitHub repo
-- Use the output `filename` for the path to artifact-context.tar.gz _file_ containing all the generated YAML
+- Use the output `filename` for the path to oc-artifact-yaml.tgz _file_ containing all the generated YAML
 - Use the output `directory` for the path to the _directory_ containing all the generated YAML
 
 ### Generate a YAML definition for a SBOM artifact
@@ -36,6 +37,8 @@ steps:
     with:
       type: sbom
       url: ${{ steps.upload-sbom-get-url.outputs.url }}
+      # save the YAML to sbom directory instead of the default oc-artifact-yaml uncomment the next line
+      #directory: sbom
 
   - name: Save OpenContext YAML
     with:
