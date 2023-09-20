@@ -44,6 +44,8 @@ export ghaRunTitle="GitHub Action Run ${GITHUB_RUN_ID}"
 export parsedGHActor="${GITHUB_ACTOR%%[bot*}"
 export ghBotAvatar="https://github.com/identicons/app/app/${parsedGHActor}"
 
+mkdir "$ghaPath"
+
 # create artifact YAML
 yq '.metadata.namespace = env(GITHUB_REPOSITORY_OWNER) | .metadata.name = env(shortname) | .metadata.title = env(fullname) | .metadata.links.[0].url = env(url) | .metadata.links.[0].title = env(fullname) |
     .metadata.links.[1].url = env(ghaRunUrl) | .metadata.links.[1].title = env(ghaRunTitle) | .metadata.annotations."github.com/project-slug" = env(GITHUB_REPOSITORY) | .spec.type = env(artifactType) | .spec.uri = env(url) |
