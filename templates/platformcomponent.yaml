@@ -5,8 +5,6 @@ metadata:
   name: ARTIFACT_NAME
   title: ARTIFACT_LONG_NAME
   links:
-    - url: ARTIFACT_URL
-      title: ARTIFACT_NAME
     - url: GITHUB_ACTION_URL
       title: GitHub Actions Run
   annotations:
