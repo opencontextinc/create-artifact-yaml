@@ -4,7 +4,8 @@
 export artifactType="${INPUT_TYPE}"
 export url="${INPUT_URL}"
 export fullname="${url##*/}"
-export ghaPath="${GITHUB_WORKSPACE}/artifact-context"
+export ghaPath="${GITHUB_WORKSPACE}/${INPUT_DIRECTORY:-oc-artifact-yaml}"
+export tgzFile="oc-artifact-yaml.tgz"
 export tplName=""
 export filename=""
 export shortname=""
@@ -62,9 +63,9 @@ fi
 
 # create tar-gzipped file of YAML generated
 cd "${ghaPath}" || exit
-tar cfz "${GITHUB_WORKSPACE}/artifact-context.tgz" .
+tar cfz "${GITHUB_WORKSPACE}/${tgzFile}" .
 
 # set GHA output filename to tar-gzipped file generated
-echo "filename=artifact-context.tgz" >> "$GITHUB_OUTPUT"
+echo "filename=${tgzFile}" >> "$GITHUB_OUTPUT"
 # set GHA output directory to the directory where the YAML files were generated
 echo "directory=${ghaPath##*/}" >> "$GITHUB_OUTPUT"
