@@ -5,7 +5,7 @@ inputs:
     description: 'Type of artifact. One of sbom, container, package, or image'
     required: true
   url:
-    description: 'URL of the artifact'
+    description: 'URL/URI of the artifact'
     required: true
 runs:
   using: 'docker'
