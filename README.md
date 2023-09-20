@@ -1,22 +1,26 @@
 # artifact-context
 
 A GitHub action to generate an OpenContext YAML definition for your artifacts in your pipeline. The following artifact types are supported:
-* sbom
-* package
-* container
-* image
 
-**NOTE**: If the GITHUB_ACTOR for the pipeline is a bot then a YAML definition will also be created for the bot.
+- sbom
+- package
+- container
+- image
+
+**NOTE**: If the GITHUB_ACTOR for the pipeline is a bot, then a YAML definition will also be created for the bot.
 
 ## Usage
+
 In general you will need to do the following to make use of this GitHub action:
 
-* Generate artifact
-* Upload artifact somewhere and make the location (URI/URL) of the artifact an output of a step
-* Pass the location of the artifact to this GitHub action
-* Save OpenContext YAML to the current repo or to another GitHub repo
-  * Use the output `filename` for the path to artifact-context.tar.gz file containing all the YAML generated
-  * Use the output `directory` for the path to the directory containing all the YAML generated
+- Generate artifact
+- Upload artifact somewhere and make the location (URI/URL) of the artifact an output of a step
+- Pass the location of the artifact to this GitHub action
+- Save OpenContext YAML to either:
+  - the current repo or
+  - to another GitHub repo
+- Use the output `filename` for the path to artifact-context.tar.gz _file_ containing all the generated YAML
+- Use the output `directory` for the path to the _directory_ containing all the generated YAML
 
 ### Generate a YAML definition for a SBOM artifact
 
@@ -40,7 +44,9 @@ steps:
 ```
 
 ### Generate a YAML definition for a package artifact
-This is mean for any kind of package that is generated as part of a build. For instance, NPM, pip, etc.
+
+This is meant for any kind of package that is generated as part of a build, such as NPM, pip, etc.
+
 ```
 steps:
   - name: generate-package
@@ -61,6 +67,7 @@ steps:
 ```
 
 ### Generate a YAML definition for a container artifact
+
 ```
 steps:
   - name: generate-container
@@ -81,7 +88,9 @@ steps:
 ```
 
 ### Generate a YAML definition for an image artifact
+
 This is meant for virtual machine images, AMIs, etc.
+
 ```
 steps:
   - name: generate-image
@@ -102,9 +111,11 @@ steps:
 ```
 
 ### Using these YAML files with OpenContext
+
 In order for OpenContext to process these files you will need to do the following:
-- De-duplicate the files generated. If the same file is found multiple times then there will be a conflict and the artifact or bot described in the YAML file will not appear in the catalog. This GitHub action will generate the same filename for the same artifact and bot. As long as the YAML generated is not modified after generation you should be able to just replace the old file with the new one if a new one is generated.
-- Save these files to a location known to OpenContext.
+
+- **De-duplicate the files generated**. If the same file is found multiple times then there will be a conflict, and the artifact or bot described in the YAML file will not appear in the catalog. This GitHub action will generate the same filename for the same artifact and bot. As long as the YAML generated is not modified after generation, you should be able to just replace the old file with a new one if a new one is generated.
+- **Save these files to a locations know to OpenContext**:
   - Commit these files to a repository that is for OpenContext YAML. For example, see the [opencontext repository](https://github.com/scatter-ly/opencontext) or the [scatter.ly repository](https://github.com/scatter-ly/scatter.ly) in our demo GitHub organization [scatter-ly](https://github.com/scatter-ly).
-  - Concatenate the contents of the files generated into an `oc-catalog.yaml` file and commit it to the root of your current repository. For example, see the [retail-app repository](https://github.com/scatter-ly/retail-app) in our demo GitHub organization [scatter-ly](https://github.com/scatter-ly).
+  - Concatenate the contents of the files generated into an `oc-catalog.yaml` file and commit it to the root of your current repository. For example, see the [retail-app repository](https://github.com/scatter-ly/retail-app) in [scatter-ly](https://github.com/scatter-ly), our demo GitHub organization.
   - Upload these files to the catalog files location for your tenant. See our [docs](https://docs.opencontext.com/docs/getting-started/client-portal#catalog-files) for more information.
