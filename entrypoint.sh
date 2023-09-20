@@ -57,6 +57,7 @@ if [ "$GITHUB_ACTOR" != "$parsedGHActor" ]; then
 fi
 
 # create tar-gzipped file of YAML generated
+pwd
 ls -l "${ghaPath}"
 set -x
 tar -cvfz "${GITHUB_WORKSPACE}/artifact-context.tgz" --directory="${ghaPath}" .
