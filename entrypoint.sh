@@ -58,6 +58,6 @@ cd "${ghaPath}" || exit
 tar cfz "${GITHUB_WORKSPACE}/artifact-context.tgz" .
 
 # set GHA output filename to tar-gzipped file generated
-echo "filename=${GITHUB_WORKSPACE}/artifact-context.tgz" >> "$GITHUB_OUTPUT"
+echo "filename=artifact-context.tgz" >> "$GITHUB_OUTPUT"
 # set GHA output directory to the directory where the YAML files were generated
-echo "directory=${ghaPath}" >> "$GITHUB_OUTPUT"
+echo "directory=${ghaPath##*/}" >> "$GITHUB_OUTPUT"
