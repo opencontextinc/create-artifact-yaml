@@ -7,26 +7,30 @@ export fullname="${url##*/}"
 export ghaPath="${GITHUB_WORKSPACE}/artifact-context"
 export tplName=""
 export filename=""
-
-if [ "$artifactType" = "container" ]; then
-  tShortName="${fullname%%:*}"
-  export shortname="${tShortName:0:63}"
-else
-  export shortname="${fullname:0:63}"
-fi
+export shortname=""
 
 env
 jq . "$GITHUB_EVENT_PATH"
 
 case "${artifactType}" in
-  sbom)             tplName="/templates/auxcomponent.yaml"
+  sbom)
+                    shortname="${fullname:0:63}"
+                    tplName="/templates/auxcomponent.yaml"
                     filename="${ghaPath}/ac-${fullname}.yaml"
                 ;;
   package)
+                    tShortName="${fullname%%#*}"
+                    shortname="${tShortName:0:63}"
                     tplName="/templates/codecomponent.yaml"
                     filename="${ghaPath}/cc-${fullname}.yaml"
                 ;;
   container|image)  
+                    if [ "$artifactType" = "container" ]; then
+                      tShortName="${fullname%%:*}"
+                      shortname="${tShortName:0:63}"
+                    else
+                      shortname="${fullname:0:63}"
+                    fi
                     tplName="/templates/platformcomponent.yaml"
                     filename="${ghaPath}/pc-${fullname}.yaml"
                 ;;
