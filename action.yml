@@ -9,6 +9,7 @@ inputs:
     required: true
   directory:
     description: 'Directory to save YAML files to. If not specified then the directory oc-artifact-yaml will be used.'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
