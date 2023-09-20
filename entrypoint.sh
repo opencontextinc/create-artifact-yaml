@@ -19,17 +19,18 @@ case "${artifactType}" in
                     tShortName="${fullname%%#*}"
                     shortname="${tShortName:0:63}"
                     tplName="/templates/codecomponent.yaml"
-                    filename="${ghaPath}/cc-${fullname}.yaml"
+                    filename="${ghaPath}/cc-${shortname}.yaml"
                 ;;
   container|image)  
                     if [ "$artifactType" = "container" ]; then
                       tShortName="${fullname%%:*}"
                       shortname="${tShortName:0:63}"
+                      filename="${ghaPath}/pc-${shortname}.yam"
                     else
                       shortname="${fullname:0:63}"
+                      filename="${ghaPath}/pc-${fullname}.yaml"
                     fi
                     tplName="/templates/platformcomponent.yaml"
-                    filename="${ghaPath}/pc-${fullname}.yaml"
                 ;;
   *) echo "ERROR: Unknown artifact type!"
      exit 1
