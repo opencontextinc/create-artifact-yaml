@@ -6,7 +6,7 @@ A GitHub action to generate an OpenContext YAML definition for your artifacts in
 * container
 * image
 
-If the GITHUB_ACTOR for the pipeline is a bot then a YAML definition will also be created for the bot.
+**NOTE**: If the GITHUB_ACTOR for the pipeline is a bot then a YAML definition will also be created for the bot.
 
 ## Usage
 In general you will need to do the following to make use of this GitHub action:
@@ -100,3 +100,11 @@ steps:
       path: ${{ steps.generate-artifact-context.outputs.filename }}
       directory: ${{ steps.generate-artifact-context.outputs.directory }}
 ```
+
+### Using these YAML files with OpenContext
+In order for OpenContext to process these files you will need to do the following:
+- De-duplicate the files generated. If the same file is found multiple times then there will be a conflict and the artifact or bot described in the YAML file will not appear in the catalog. This GitHub action will generate the same filename for the same artifact and bot. As long as the YAML generated is not modified after generation you should be able to just replace the old file with the new one if a new one is generated.
+- Save these files to a location known to OpenContext.
+  - Commit these files to a repository that is for OpenContext YAML. For example, see the [opencontext repository](https://github.com/scatter-ly/opencontext) or the [scatter.ly repository](https://github.com/scatter-ly/scatter.ly) in our demo GitHub organization [scatter-ly](https://github.com/scatter-ly).
+  - Concatenate the contents of the files generated into an `oc-catalog.yaml` file and commit it to the root of your current repository. For example, see the [retail-app repository](https://github.com/scatter-ly/retail-app) in our demo GitHub organization [scatter-ly](https://github.com/scatter-ly).
+  - Upload these files to the catalog files location for your tenant. See our [docs](https://docs.opencontext.com/docs/getting-started/client-portal#catalog-files) for more information.
