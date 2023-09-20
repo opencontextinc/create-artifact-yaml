@@ -8,7 +8,7 @@ export ghaPath="${GITHUB_WORKSPACE}/artifact-context"
 export tplName=""
 export filename=""
 
-if [ "$artifactType" == "container" ]; then
+if [ "$artifactType" = "container" ]; then
   tShortName="${fullname%%:*}"
   export shortname="${tShortName:0:63}"
 else
