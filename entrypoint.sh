@@ -45,9 +45,15 @@ export ghBotAvatar="https://github.com/identicons/app/app/${parsedGHActor}"
 mkdir "$ghaPath"
 
 # create artifact YAML
-yq '.metadata.namespace = env(GITHUB_REPOSITORY_OWNER) | .metadata.name = env(shortname) | .metadata.title = env(fullname) | .metadata.links.[0].url = env(url) | .metadata.links.[0].title = env(fullname) |
-    .metadata.links.[1].url = env(ghaRunUrl) | .metadata.links.[1].title = env(ghaRunTitle) | .metadata.annotations."github.com/project-slug" = env(GITHUB_REPOSITORY) | .spec.type = env(artifactType) | .spec.uri = env(url) |
-    .spec.owner[0] = env(GITHUB_REPOSITORY_OWNER) + "/" + env(parsedGHActor) | .spec.dependsOn[0] = "codecomponent:" + env(GITHUB_REPOSITORY)' "${tplName}" > "${filename}"
+if [ "${artifactType}" = "container" ] || [ "${artifactType}" = "image" ]; then
+  yq '.metadata.namespace = env(GITHUB_REPOSITORY_OWNER) | .metadata.name = env(shortname) | .metadata.title = env(fullname) |
+      .metadata.links.[0].url = env(ghaRunUrl) | .metadata.links.[0].title = env(ghaRunTitle) | .metadata.annotations."github.com/project-slug" = env(GITHUB_REPOSITORY) | .spec.type = env(artifactType) | .spec.uri = env(url) |
+      .spec.owner[0] = env(GITHUB_REPOSITORY_OWNER) + "/" + env(parsedGHActor) | .spec.dependsOn[0] = "codecomponent:" + env(GITHUB_REPOSITORY)' "${tplName}" > "${filename}"
+else
+  yq '.metadata.namespace = env(GITHUB_REPOSITORY_OWNER) | .metadata.name = env(shortname) | .metadata.title = env(fullname) | .metadata.links.[0].url = env(url) | .metadata.links.[0].title = env(fullname) |
+      .metadata.links.[1].url = env(ghaRunUrl) | .metadata.links.[1].title = env(ghaRunTitle) | .metadata.annotations."github.com/project-slug" = env(GITHUB_REPOSITORY) | .spec.type = env(artifactType) | .spec.uri = env(url) |
+      .spec.owner[0] = env(GITHUB_REPOSITORY_OWNER) + "/" + env(parsedGHActor) | .spec.dependsOn[0] = "codecomponent:" + env(GITHUB_REPOSITORY)' "${tplName}" > "${filename}"
+fi
 
 # create YAML for bot
 if [ "$GITHUB_ACTOR" != "$parsedGHActor" ]; then
