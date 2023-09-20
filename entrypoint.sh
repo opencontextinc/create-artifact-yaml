@@ -9,9 +9,6 @@ export tplName=""
 export filename=""
 export shortname=""
 
-#env
-#jq . "$GITHUB_EVENT_PATH"
-
 case "${artifactType}" in
   sbom)
                     shortname="${fullname:0:63}"
@@ -57,11 +54,8 @@ if [ "$GITHUB_ACTOR" != "$parsedGHActor" ]; then
 fi
 
 # create tar-gzipped file of YAML generated
-pwd
-ls -l "${ghaPath}"
-set -x
-tar -cvfz "${GITHUB_WORKSPACE}/artifact-context.tgz" --directory="${ghaPath}" .
-set +x
+cd "${ghaPath}" || exit
+tar -cvfz "${GITHUB_WORKSPACE}/artifact-context.tgz" .
 
 # set GHA output filename to tar-gzipped file generated
 echo "filename=${GITHUB_WORKSPACE}/artifact-context.tgz" >> "$GITHUB_OUTPUT"
