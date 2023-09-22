@@ -1,5 +1,8 @@
 name: 'Create Artifact YAML'
 description: 'Generate OpenContext Artifact YAML File'
+branding:
+  icon: 'map'
+  color: 'blue'
 inputs:
   type:
     description: 'Type of artifact. One of sbom, container, package, or image'
@@ -10,6 +13,11 @@ inputs:
   directory:
     description: 'Directory to save YAML files to. If not specified then the directory oc-artifact-yaml will be used.'
     required: false
+outputs:
+  filename:
+    description: "The path to oc-artifact-yaml.tgz file containing all the generated YAML."
+  director:
+    description: "The path to the directory containing all the generated YAML."
 runs:
   using: 'docker'
   image: 'Dockerfile'
