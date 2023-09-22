@@ -1,0 +1,17 @@
+apiVersion: opencontext.com/v1alpha1
+kind: PlatformComponent
+metadata:
+  namespace: GH_ORG
+  name: ARTIFACT_NAME
+  title: ARTIFACT_LONG_NAME
+  links:
+    - url: GITHUB_ACTION_URL
+      title: GitHub Actions Run
+  annotations:
+    github.com/project-slug: GITHUB_REPO
+spec:
+  type: ARTIFACT_TYPE
+  lifecycle: ACTIVE
+  uri: ARTIFACT_URL
+  owner: []
+  dependsOn: []

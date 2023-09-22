@@ -122,3 +122,4 @@ In order for OpenContext to process these files you will need to do the followin
   - Commit these files to a repository that is for OpenContext YAML. For example, see the [opencontext repository](https://github.com/scatter-ly/opencontext) or the [scatter.ly repository](https://github.com/scatter-ly/scatter.ly) in our demo GitHub organization [scatter-ly](https://github.com/scatter-ly).
   - Concatenate the contents of the files generated into an `oc-catalog.yaml` file and commit it to the root of your current repository. For example, see the [retail-app repository](https://github.com/scatter-ly/retail-app) in [scatter-ly](https://github.com/scatter-ly), our demo GitHub organization.
   - Upload these files to the catalog files location for your tenant. See our [docs](https://docs.opencontext.com/docs/getting-started/client-portal#catalog-files) for more information.
+
