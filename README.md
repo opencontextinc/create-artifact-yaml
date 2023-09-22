@@ -32,8 +32,8 @@ steps:
   - id: upload-sbom-get-url
     name: Upload SBOM somewhere and make the url the output of this step
 
-  - id: generate-artifact-context
-    uses: opencontextinc/artifact-context@v1.0.0
+  - id: generate-create-artifact-yaml
+    uses: opencontextinc/create-artifact-yaml@v1.0.0
     with:
       type: sbom
       url: ${{ steps.upload-sbom-get-url.outputs.url }}
@@ -42,8 +42,8 @@ steps:
 
   - name: Save OpenContext YAML
     with:
-      path: ${{ steps.generate-artifact-context.outputs.filename }}
-      directory: ${{ steps.generate-artifact-context.outputs.directory }}
+      path: ${{ steps.generate-create-artifact-yaml.outputs.filename }}
+      directory: ${{ steps.generate-create-artifact-yaml.outputs.directory }}
 ```
 
 ### Generate a YAML definition for a package artifact
@@ -57,16 +57,16 @@ steps:
   - id: upload-package-get-url
     name: Upload package somewhere and make the url the output of this step
 
-  - id: generate-artifact-context
-    uses: opencontextinc/artifact-context@v1.0.0
+  - id: generate-create-artifact-yaml
+    uses: opencontextinc/create-artifact-yaml@v1.0.0
     with:
       type: package
       url: ${{ steps.upload-package-get-url.outputs.url }}
 
   - name: Save OpenContext YAML
     with:
-      path: ${{ steps.generate-artifact-context.outputs.filename }}
-      directory: ${{ steps.generate-artifact-context.outputs.directory }}
+      path: ${{ steps.generate-create-artifact-yaml.outputs.filename }}
+      directory: ${{ steps.generate-create-artifact-yaml.outputs.directory }}
 ```
 
 ### Generate a YAML definition for a container artifact
@@ -76,18 +76,18 @@ steps:
   - name: generate-container
 
   - id: push-container-to-registry
-    name: Push container to registry and make the container image location (registry/container_name:tag) the output of this step. For example,  opencontextinc/artifact-context:latest
+    name: Push container to registry and make the container image location (registry/container_name:tag) the output of this step. For example,  opencontextinc/create-artifact-yaml:latest
 
-  - id: generate-artifact-context
-    uses: opencontextinc/artifact-context@v1.0.0
+  - id: generate-create-artifact-yaml
+    uses: opencontextinc/create-artifact-yaml@v1.0.0
     with:
       type: container
       url: ${{ steps.push-container-to-registry.outputs.url }}
 
   - name: Save OpenContext YAML
     with:
-      path: ${{ steps.generate-artifact-context.outputs.filename }}
-      directory: ${{ steps.generate-artifact-context.outputs.directory }}
+      path: ${{ steps.generate-create-artifact-yaml.outputs.filename }}
+      directory: ${{ steps.generate-create-artifact-yaml.outputs.directory }}
 ```
 
 ### Generate a YAML definition for an image artifact
@@ -101,16 +101,16 @@ steps:
   - id: upload-image-get-url
     name: Upload image somewhere and make the uri the output of this step
 
-  - id: generate-artifact-context
-    uses: opencontextinc/artifact-context@v1.0.0
+  - id: generate-create-artifact-yaml
+    uses: opencontextinc/create-artifact-yaml@v1.0.0
     with:
       type: image
       url: ${{ steps.upload-image-get-url.outputs.url }}
 
   - name: Save OpenContext YAML
     with:
-      path: ${{ steps.generate-artifact-context.outputs.filename }}
-      directory: ${{ steps.generate-artifact-context.outputs.directory }}
+      path: ${{ steps.generate-create-artifact-yaml.outputs.filename }}
+      directory: ${{ steps.generate-create-artifact-yaml.outputs.directory }}
 ```
 
 ### Using these YAML files with OpenContext
