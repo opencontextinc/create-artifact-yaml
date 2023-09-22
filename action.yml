@@ -1,5 +1,5 @@
-name: 'Generate Context File'
-description: 'Generate OpenContext Artifact Context File'
+name: 'Create Artifact YAML'
+description: 'Generate OpenContext Artifact YAML File'
 inputs:
   type:
     description: 'Type of artifact. One of sbom, container, package, or image'

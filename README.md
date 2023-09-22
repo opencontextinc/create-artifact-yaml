@@ -1,4 +1,4 @@
-# artifact-context
+# create-artifact-yaml
 
 A GitHub action to generate an OpenContext YAML definition for your artifacts in your pipeline. The following artifact types are supported:
 
