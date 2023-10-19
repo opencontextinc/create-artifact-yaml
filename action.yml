@@ -16,7 +16,7 @@ inputs:
 outputs:
   filename:
     description: "The path to oc-artifact-yaml.tgz file containing all the generated YAML."
-  director:
+  directory:
     description: "The path to the directory containing all the generated YAML."
 runs:
   using: 'docker'
